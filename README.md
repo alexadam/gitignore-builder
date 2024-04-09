@@ -1,4 +1,6 @@
-# .gitignore UI Builder
+# .gitignore Builder UI
+
+A simple app to create .gitignore files
 
 **Demo** https://alexadam.github.io/demos/gitignore-builder/index.html
 
