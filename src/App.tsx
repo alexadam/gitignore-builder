@@ -144,10 +144,13 @@ function App() {
   }
 
   const downloadGitignore = () => {
-    let filename = '_.gitignore';
+    const filename = '_.gitignore';
 
-    let element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+    const fullContent =  content.trim() +
+      (content.trim().length > 0 ? "\n\n# Made with: https://github.com/alexadam/gitignore-builder" : "")
+
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fullContent));
     element.setAttribute('download', filename);
 
     element.style.display = 'none';
@@ -222,6 +225,7 @@ function App() {
       <div className="flex flex-row w-full h-full flex-grow-0 min-h-0">
         <div className="flex flex-col h-full w-[150px]">
           <div className="flex flex-col p-5 h-full border-b-2 items-start overflow-y-auto no-scrollbar">
+            <b className="pb-4">Categories</b>
             {
               allTags.map(t => <button key={t} onClick={() => toggleTag(t)}
                                        className={
@@ -234,6 +238,7 @@ function App() {
             }
           </div>
           <div className="flex flex-col p-5 h-full overflow-y-auto no-scrollbar">
+            <b className="pb-4 w-full">Lists</b>
             {
               allLists.map(t => <button key={t.name} onClick={() => toggleList(t.name)}
                                         className={
@@ -293,7 +298,8 @@ function App() {
           <div className="flex flex-row justify-end">
             <button
               className="w-40 mr-2 inline-flex justify-center gap-x-1.5 rounded-md bg-green-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => navigator.clipboard.writeText(content)}>
+              onClick={() => navigator.clipboard.writeText(content.trim() +
+                (content.trim().length > 0 ? "\n\n# Made with: https://github.com/alexadam/gitignore-builder" : ""))}>
               <ClipboardDocumentIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
               Copy
             </button>
